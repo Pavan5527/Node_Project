@@ -61,7 +61,7 @@
 
 
 
-//using of lodash function
+//how to use lodash function
 var _ = require("lodash");
 var data=['papa','pap',1,1,3,3,'name','age']
 var filter=_.uniq(data);
