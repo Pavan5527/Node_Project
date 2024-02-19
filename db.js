@@ -1,27 +1,30 @@
-const mongoose=require('mongoose');
-
+const mongoose = require("mongoose");
+require("dotenv").config();
 //defint the mongodb connection URL
-const mongoURL='mongodb://0.0.0.0:27017/hotels'  //replace the hotela with your choice DB
+// const mongoURL='process.env.MONGODB_LOCAL'  //replace the hotela with your choice DB
 
-//setup the mongodb connection
+// MongoDB Atlas connection string with the actual username and password - online connection
+const mongoURL =process.env.MONGODB_URL;
+
+// Setup the MongoDB connection
 mongoose.connect(mongoURL);
 
 //get the default connection
 //mongoose maintains a ddefault connection object representing the Mongodb connection
-const db=mongoose.connection;
+const db = mongoose.connection;
 
-//define event listeners fro DB connection
-db.on('connected',() =>{
-    console.log('Connected to mongodb server');
+// Define event listeners for DB connection
+db.on("connected", () => {
+  console.log("Connected to MongoDB server");
 });
 
-db.on('error',(err)=>{
-    console.log('Mongodb connection error',err);
+db.on("error", (err) => {
+  console.error("MongoDB connection error:", err);
 });
 
-db.on('disconnected',()=>{
-    console.log('MongoDb disconnected');
+db.on("disconnected", () => {
+  console.log("MongoDB disconnected");
 });
 
-//to make the final connecton we should export the DB conection
-module.exports=db;
+// Export the DB connection
+module.exports = db;
